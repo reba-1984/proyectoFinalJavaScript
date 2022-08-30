@@ -10,6 +10,13 @@ header{
     padding: 20px;
 }
 
+footer{
+    background-color: black;
+    color: white;
+    padding: 5px;
+    margin-top: 20px;
+}
+
 .logo{
     height: 50px;
 }

@@ -1,17 +1,20 @@
 console.log('Bienvenidos al simulador interactivo \nCotizador de impresiones en gran formato:');
 
-//valor del metro cudrado de cada material:
+//valor del metro lineal o cudrado de cada material:
 const valorMetroLinealVinilo = 13600;
 const valorMetroLinealLona = 15000;
+const valorMetroLinealFotografico = 13000;
+const valorMetroLinealPropalcote = 4600;
 const valorMetroCuadradoLienzo = 75000;
 
 //valor del metro lineal de los tubos de aluminio que se usa para el pendon publisictario:
-const valorMetroTuboAluminio = 10000;
+const valorMetroTuboAluminio = 5000;
 
 //valor de la impresión por metro cuadrado en el plotter de impresión en gran formato HP-Latex-540:
 const valorMetroCuadradoPloteo = 25000;
 const valorMinimoPloteo = 10000;
 const valorMetroPloteoLienzo = 50000;
+const valorMinimoPloteoLienzo = 12500;
 
 // variable que guarda el tamaño minimo
 const medidaMinima = 20;
@@ -25,7 +28,7 @@ let cuerpo = document.getElementById('cuerpo');
 
 // contador
 let contador = 0;
-if (localStorage.getItem(0) === null  || localStorage.getItem(0) == 0) {
+if (localStorage.getItem(0) === null || localStorage.getItem(0) == 0) {
     console.log(' no existe');
     localStorage.setItem(0, contador);
     cuerpo.innerHTML = 'No has hecho ninguna cotización';
@@ -52,17 +55,23 @@ function validarMaterial() {
     switch (material) {
         case 'Vinilo':
             objeto.anchoMaximo = 130;
-            validarMedidasGeneral(objeto);
+            if (validarMedidasGeneral(objeto)) {
+                precioProducto(objeto, valorMetroLinealVinilo);
+            }
             break;
         case 'Lona':
             objeto.anchoMaximo = 130;
-            validarMedidasGeneral(objeto);
+            if (validarMedidasGeneral(objeto)) {
+                precioProducto(objeto, valorMetroLinealLona);
+            }
             break;
 
         case 'Pendón Vertical':
             objeto.anchoMaximo = 130;
             if (ancho <= alto) {
-                validarMedidasGeneral(objeto);
+                if (validarMedidasGeneral(objeto)) {
+                    precioProducto(objeto, valorMetroLinealLona);
+                }
             } else {
                 //sweet alert
                 Swal.fire({
@@ -82,7 +91,9 @@ function validarMaterial() {
                 } else {
                     objeto.anchoMaximo = 120;
                 }
-                validarMedidasGeneral(objeto);
+                if (validarMedidasGeneral(objeto)) {
+                    precioProducto(objeto, valorMetroLinealLona);
+                }
             } else {
                 //sweet alert
                 Swal.fire({
@@ -97,31 +108,36 @@ function validarMaterial() {
 
         case 'Lienzo':
             objeto.anchoMaximo = 125;
-            validarMedidasGeneral(objeto);
+            if (validarMedidasGeneral(objeto)) {
+                precioProductoLienzo(objeto, valorMetroCuadradoLienzo);
+            }
             break;
         case 'Propalcote':
             objeto.anchoMaximo = 130;
-            validarMedidasGeneral(objeto);
+            if (validarMedidasGeneral(objeto)) {
+                precioProducto(objeto, valorMetroLinealPropalcote);
+            }
             break;
         case 'Fotográfico':
             objeto.anchoMaximo = 70;
-            validarMedidasGeneral(objeto);
+            if (validarMedidasGeneral(objeto)) {
+                precioProducto(objeto, valorMetroLinealFotografico);
+            }
             break;
     }
 }
 
 function validarMedidasGeneral(objetoValidar) {
-    //aplico desestructuración
-    let { ancho, alto, material, anchoMaximo } = objetoValidar;
     // aplico el operador lógico AND
-    if (ancho >= medidaMinima && alto >= medidaMinima) {
+    let validacion = false;
+    if (objetoValidar.ancho >= medidaMinima && objetoValidar.alto >= medidaMinima) {
         // aplico el operador Ternario y el operadpor lógico OR
-        ancho <= anchoMaximo || alto <= anchoMaximo ? precioProducto(ancho, alto, material, anchoMaximo) :
+        objetoValidar.ancho <= objetoValidar.anchoMaximo || objetoValidar.alto <= objetoValidar.anchoMaximo ? validacion = true :
             //sweet alert
             Swal.fire({
                 confirmButtonColor: '#000',
                 title: 'Advertencia!',
-                text: `Alguna de las dos medidas debe ser menor o igual a ${anchoMaximo}`,
+                text: `Alguna de las dos medidas debe ser menor o igual a ${objetoValidar.anchoMaximo}`,
                 icon: 'warning',
                 confirmButtonText: 'OK'
             })
@@ -136,32 +152,60 @@ function validarMedidasGeneral(objetoValidar) {
             confirmButtonText: 'OK'
         })
     }
+    return validacion;
 }
 
-function precioProducto(ancho, alto, material, anchoMaximo) {
+// función que calcula en precio de las impresiones generales
+function precioProducto(objetoValidado, valorMetromaterialProducto) {
     // calculo el precio del ploteo
-    let precioPloteo = (Math.round(((ancho / 100) * (alto / 100) * valorMetroCuadradoPloteo) / 1000)) * 1000;
+    let precioPloteo = (Math.round(((objetoValidado.ancho / 100) * (objetoValidado.alto / 100) * valorMetroCuadradoPloteo) / 1000)) * 1000;
     if (precioPloteo < valorMinimoPloteo) {
         precioPloteo = valorMinimoPloteo;
     }
     // calculo el precio del material
     let precioMaterial = 0;
-    if (ancho > anchoMaximo) {
-        precioMaterial = (ancho / 100) * (valorMetroLinealVinilo);
-    } else if (alto > anchoMaximo) {
-        precioMaterial = (alto / 100) * (valorMetroLinealVinilo);
-    } else if (ancho < alto) {
-        precioMaterial = (ancho / 100) * (valorMetroLinealVinilo);
+    if (objetoValidado.ancho > objetoValidado.anchoMaximo) {
+        precioMaterial = (objetoValidado.ancho / 100) * (valorMetromaterialProducto);
+    } else if (objetoValidado.alto > objetoValidado.anchoMaximo) {
+        precioMaterial = (objetoValidado.alto / 100) * (valorMetromaterialProducto);
+    } else if (objetoValidado.ancho < objetoValidado.alto) {
+        precioMaterial = (objetoValidado.ancho / 100) * (valorMetromaterialProducto);
     } else {
-        precioMaterial = (alto / 100) * (valorMetroLinealVinilo);
+        precioMaterial = (objetoValidado.alto / 100) * (valorMetromaterialProducto);
     }
-    precioMaterial = (Math.round(precioMaterial / 1000)) * 1000;
+    precioMaterial = (Math.ceil(precioMaterial / 1000)) * 1000;
+    let valorTubos = 0;
+    if (objetoValidado.material == 'Pendón Vertical' || objetoValidado.material == 'Pendón Horizontal') {
+        valorTubos = (objetoValidado.ancho / 100) * valorMetroTuboAluminio * 2;
+    }
+    // sumamos en precio del ploteo mas el precio del material
+    let precio = precioMaterial + precioPloteo + valorTubos;
+    // llamo a agregar cotizacion:
+    agregarCotizacion(objetoValidado, precio);
+}
+
+// función especial para calcular el valor del lienzo
+function precioProductoLienzo(lienzoValidado) {
+    // calculo el precio del ploteo del lienzo
+    let precioPloteo = (Math.round(((lienzoValidado.ancho / 100) * (lienzoValidado.alto / 100) * valorMetroPloteoLienzo) / 1000)) * 1000;
+    if (precioPloteo < valorMinimoPloteoLienzo) {
+        precioPloteo = valorMinimoPloteoLienzo;
+    }
+    // calculo el precio del material del lienzo
+    let precioMaterial = ((lienzoValidado.ancho + 10) / 100) * ((lienzoValidado.alto + 10) / 100) * 75000;
+    precioMaterial = (Math.ceil(precioMaterial / 1000)) * 1000;
     // sumamos en precio del ploteo mas el precio del material
     let precio = precioMaterial + precioPloteo;
+    // llamo a agregar cotizacion:
+    agregarCotizacion(lienzoValidado, precio);
+}
+
+// Función agregar a la lista de cotizaciones
+function agregarCotizacion(objetoValidado, precio) {
     // variable que me trae el elemento id= resultado
     let resultado = document.getElementById('resultado');
     // le asigno el nuevo valor al elemento de id resultado
-    resultado.innerHTML = `El precio de tu ${material} es: $${precio} Cop`;
+    resultado.innerHTML = `El precio de tu ${objetoValidado.material} es: $${precio} Cop`;
     // variable que me trae el parrafo del mensaje del iva
     let mensajeIva = document.getElementById('mensajeIva');
     // le cambio el display al mensaje iva
@@ -169,7 +213,7 @@ function precioProducto(ancho, alto, material, anchoMaximo) {
     // aplico el operador ++
     contador++;
     // creo el objeto producto
-    producto = { id: contador, material: material, ancho: ancho, alto: alto, costo: precio };
+    producto = { id: contador, material: objetoValidado.material, ancho: objetoValidado.ancho, alto: objetoValidado.alto, costo: precio };
     //agrego el conTador
     localStorage.setItem(0, contador);
     //convierto en json el objeto
@@ -179,6 +223,7 @@ function precioProducto(ancho, alto, material, anchoMaximo) {
     // llamo a la función listar
     listarImpresionesCotizadas();
 }
+
 
 // lista de impresiones cotizadas
 function listarImpresionesCotizadas() {
