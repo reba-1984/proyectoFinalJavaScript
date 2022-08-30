@@ -1,0 +1,115 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    background-color: black;
+    padding: 20px;
+}
+
+.logo{
+    height: 50px;
+}
+
+h1, h3, p{
+    text-align: center;
+    margin: 20px;
+}
+
+h1{
+    font-size: 72px;
+}
+
+h2{
+    text-align: center;
+    font-size: 36;
+    margin-bottom: 20px;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    background-color: gold;
+    border-radius: 20px;
+    width: 40vw;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+input, select{
+    font-size: 1.2rem;
+    width: 100%;
+    border: solid 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+label{
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.boton{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: black;
+    color: gold;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+}
+
+button:hover{
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.resultado{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/*lista de cotizaciones*/
+.cuerpo{
+    background-color: gold;
+    border-radius: 20px;
+    width: 40vw;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.invisible{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+@media screen and (max-width: 720px) {
+    .formulario{
+        width: 80vw;
+    }
+    .cuerpo{
+        min-width: 80vw;
+        max-width: max-content;
+    }
+}
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/ICONO_VIRTUAL.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Simulador interactivo Avance 1</title>
+</head>
+<body>
+    <header>
+        <img src="images/LOGO_VIRTUAL.png" alt="Logotipo Virtual Copias" class="logo">
+    </header>
+    <h1>Simulador Interactivo</h1>
+    <hr>
+    <p>Es un cotizador de impresiones de gran formato en diferentes tipos de material dependiendo de su medida. <br>Como lo pueden ser vinilos adhesivos, pendones publicitarios y lienzos para cuadros decorativos.</p>
+
+    <div class="formulario">
+        <h2>Cotiza tu impresión</h2>
+            <div class="material">
+                <label for="material">Material:</label>
+                <select name="material" id="material">
+                    <option value="Vinilo">Vinilo</option>
+                    <option value="Lona">Lona</option>
+                    <option value="Pendón Vertical">Pendón Vertical</option>
+                    <option value="Pendón Horizontal">Pendón Horizontal</option>
+                    <option value="Lienzo">Lienzo</option>
+                    <option value="Propalcote">Propalcote</option>
+                    <option value="Fotográfico">Fotográfico</option>
+                </select>
+            </div>
+            <div>
+                <label for="ancho">Ancho:</label>
+                <input type="number" id="ancho" name="ancho" placeholder="Ingrese el ancho" min="20" required>
+            </div>
+            <div>
+                <label for="alto">Alto:</label>
+                <input type="number" id="alto" name="alto" placeholder="Ingrese el alto" min="20" required> 
+            </div>
+            <div class="boton">
+                <button type="button" id="button">Cotizar</button>    
+            </div>
+            <div class="boton">
+                <button type="button" id="buttonReset">Limpiar</button>    
+            </div>
+            <span id="resultado" class="resultado"></span>
+            <p id="mensajeIva" class="invisible">*Este valor no incluye IVA</p>
+    </div>
+
+    <h3>Lista de impresiones cotizadas</h3>
+
+    <div class="cuerpo">
+        <div id="cuerpo">
+            No has hecho ninguna cotización
+        </div>
+        <div class="boton">
+            <button type="button" id="buttonTotal" class="invisible">Total</button>
+        </div>
+        <span id="resultadoTotal" class="resultado"></span>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/simulador.js"></script>
+</body>
+</html>
