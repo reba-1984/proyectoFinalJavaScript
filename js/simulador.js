@@ -288,6 +288,11 @@ function resetear() {
     })
 }
 
+//funcion que suma totas las cotizaciones
+function totalizar() {
+    console.log('total cotizaciones');
+}
+
 // Botón 
 let boton = document.getElementById('button');
 boton.addEventListener('click', validarMaterial);
@@ -296,3 +301,6 @@ boton.addEventListener('click', validarMaterial);
 let botonReset = document.getElementById('buttonReset');
 botonReset.addEventListener('click', resetear);
 
+// Botón total
+let botonTotal = document.getElementById('buttonTotal');
+botonTotal.addEventListener('click', totalizar)
