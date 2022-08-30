@@ -1,34 +1,23 @@
 console.log('Bienvenidos al simulador interactivo \nCotizador de impresiones en gran formato:');
 
 //valor del metro cudrado de cada material:
-let valorMetroLinealVinilo;
-let valorMetroLinealLona;
-let valorMetroCuadradoLienzo;
-//valor del metro lineal de los tubos de aluminio que se usa para el pendon publisictario:
-let valorMetroTuboAluminio;
-//valor de la impresión por metro cuadrado en el plotter de impresión en gran formato HP-Latex-540:
-let valorMetroCuadradoPloteo;
-let valorMinimoPloteo;
-let valorMetroPloteoLienzo;
-// variable que guarda el tamaño minimo
-let medidaMinima;
-//valor del servicio de corte para el vinilo adhesivo:
-let valorMetroLinealCorte;
+const valorMetroLinealVinilo = 13600;
+const valorMetroLinealLona = 15000;
+const valorMetroCuadradoLienzo = 75000;
 
-// accediendo al json mediante ruta relativa
-fetch('../data/precios.json')
-    .then((res) => res.json())
-    .then((data) => {
-        valorMetroLinealVinilo = data.valorMetroLinealVinilo;
-        valorMetroLinealLona = data.valorMetroLinealLona;
-        valorMetroCuadradoLienzo = data.valorMetroCuadradoLienzo;
-        valorMetroTuboAluminio = data.valorMetroTuboAluminio;
-        valorMetroCuadradoPloteo = data.valorMetroCuadradoPloteo;
-        valorMinimoPloteo = data.valorMinimoPloteo;
-        valorMetroPloteoLienzo = data.valorMetroPloteoLienzo;
-        medidaMinima = data.medidaMinima;
-        valorMetroLinealCorte = data.valorMetroLinealCorte;
-    })
+//valor del metro lineal de los tubos de aluminio que se usa para el pendon publisictario:
+const valorMetroTuboAluminio = 10000;
+
+//valor de la impresión por metro cuadrado en el plotter de impresión en gran formato HP-Latex-540:
+const valorMetroCuadradoPloteo = 25000;
+const valorMinimoPloteo = 10000;
+const valorMetroPloteoLienzo = 50000;
+
+// variable que guarda el tamaño minimo
+const medidaMinima = 20;
+
+//valor del servicio de corte para el vinilo adhesivo:
+const valorMetroLinealCorte = 7800;
 
 //objeto producto cotizado
 let producto = {};
