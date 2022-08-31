@@ -252,6 +252,8 @@ function listarImpresionesCotizadas() {
         return 0;
     });
 
+    let sumaTotal = 0;
+
     //recorro la lista de impresiones cotizadas
     listaImpresiones.forEach(p => {
         // creamos elemento de tipo li
@@ -263,8 +265,14 @@ function listarImpresionesCotizadas() {
             //agregamos el elemento al padre
             cuerpo.append(li);
             console.log(p);
+            sumaTotal = sumaTotal + p.costo;
         }
     });
+
+    // variable que me trae el elemento id= resultadoTotal
+    let resultadoTotal = document.getElementById('resultadoTotal');
+    // le asigno el nuevo valor al elemento de id resultado
+    resultadoTotal.innerHTML = `El total de tu cotización es: $${sumaTotal} + IVA`;
 }
 
 // funcion que borra el local storage y recarga la pagina

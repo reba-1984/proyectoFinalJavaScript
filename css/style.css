@@ -92,6 +92,16 @@ button:hover{
     font-weight: bold;
 }
 
+.total{
+    display: flex;
+    justify-content: center;
+}
+
+.total .resultado{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
 /*lista de cotizaciones*/
 .cuerpo{
     background-color: gold;
@@ -117,6 +127,10 @@ button:hover{
     .cuerpo{
         min-width: 80vw;
         max-width: max-content;
+    }
+    header{
+        display: flex;
+        justify-content: center;
     }
 }
 
