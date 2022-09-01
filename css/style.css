@@ -17,6 +17,11 @@ footer{
     margin-top: 20px;
 }
 
+.parrafo{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .logo{
     height: 50px;
 }
@@ -112,6 +117,10 @@ button:hover{
     margin-right: auto;
 }
 
+#cuerpo{
+    list-style-type: none;
+}
+
 .invisible{
     display: none;
 }
@@ -131,6 +140,9 @@ button:hover{
     header{
         display: flex;
         justify-content: center;
+    }
+    .logo{
+        height: 60px;
     }
 }
 
