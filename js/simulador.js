@@ -15,6 +15,7 @@ const valorMetroCuadradoPloteo = 25000;
 const valorMinimoPloteo = 10000;
 const valorMetroPloteoLienzo = 50000;
 const valorMinimoPloteoLienzo = 12500;
+const valorMinimoMaterialLienzo = 12500;
 
 // variable que guarda el tamaño minimo
 const medidaMinima = 20;
@@ -193,11 +194,19 @@ function precioProductoLienzo(lienzoValidado) {
     }
     // calculo el precio del material del lienzo
     let precioMaterial = ((lienzoValidado.ancho + 10) / 100) * ((lienzoValidado.alto + 10) / 100) * 75000;
+    precioMaterial = parseInt(precioMaterial);
     precioMaterial = (Math.ceil(precioMaterial / 1000)) * 1000;
+    if (precioMaterial < valorMinimoMaterialLienzo ) {
+        precioMaterial = valorMinimoMaterialLienzo;
+    }
     // sumamos en precio del ploteo mas el precio del material
     let precio = precioMaterial + precioPloteo;
     // llamo a agregar cotizacion:
     agregarCotizacion(lienzoValidado, precio);
+
+    console.log(precioMaterial);
+    console.log(precioPloteo);
+    
 }
 
 // Función agregar a la lista de cotizaciones
@@ -296,11 +305,6 @@ function resetear() {
     })
 }
 
-//funcion que suma totas las cotizaciones
-function totalizar() {
-    console.log('total cotizaciones');
-}
-
 // Botón 
 let boton = document.getElementById('button');
 boton.addEventListener('click', validarMaterial);
@@ -309,6 +313,3 @@ boton.addEventListener('click', validarMaterial);
 let botonReset = document.getElementById('buttonReset');
 botonReset.addEventListener('click', resetear);
 
-// Botón total
-let botonTotal = document.getElementById('buttonTotal');
-botonTotal.addEventListener('click', totalizar)
