@@ -8,7 +8,7 @@ const valorMetroLinealPropalcote = 4600;
 const valorMetroCuadradoLienzo = 75000;
 
 //valor del metro lineal de los tubos de aluminio que se usa para el pendon publisictario:
-const valorMetroTuboAluminio = 5000;
+const valorMetroTuboAluminio = 6000;
 
 //valor de la impresión por metro cuadrado en el plotter de impresión en gran formato HP-Latex-540:
 const valorMetroCuadradoPloteo = 25000;
