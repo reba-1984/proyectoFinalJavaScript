@@ -159,7 +159,7 @@ function validarMedidasGeneral(objetoValidar) {
 // función que calcula en precio de las impresiones generales
 function precioProducto(objetoValidado, valorMetromaterialProducto) {
     // calculo el precio del ploteo
-    let precioPloteo = (Math.round(((objetoValidado.ancho / 100) * (objetoValidado.alto / 100) * valorMetroCuadradoPloteo) / 1000)) * 1000;
+    let precioPloteo = (Math.ceil(((objetoValidado.ancho / 100) * (objetoValidado.alto / 100) * valorMetroCuadradoPloteo) / 1000)) * 1000;
     if (precioPloteo < valorMinimoPloteo) {
         precioPloteo = valorMinimoPloteo;
     }
@@ -178,6 +178,7 @@ function precioProducto(objetoValidado, valorMetromaterialProducto) {
     let valorTubos = 0;
     if (objetoValidado.material == 'Pendón Vertical' || objetoValidado.material == 'Pendón Horizontal') {
         valorTubos = (objetoValidado.ancho / 100) * valorMetroTuboAluminio * 2;
+        valorTubos = (Math.ceil(valorTubos / 1000)) * 1000;
     }
     // sumamos en precio del ploteo mas el precio del material
     let precio = precioMaterial + precioPloteo + valorTubos;
